@@ -326,11 +326,14 @@ If you use this package for your research, a footnote with the link to this repo
 For citation with BibTeX:
 
 ```
-@misc{deeplio2020,
-  title={DeepLIO: Deep Lidar Inertial Odometry.},
-  author={Javanmard-Gh., Arash},
-  howpublished={\url{https://github.com/ArashJavan/DeepLIO}},
-  year={2020}
+@article{isprs-annals-V-1-2021-47-2021,
+author = {Javanmard-Gh., A and Iwaszczuk, D and Roth, S},
+doi = {10.5194/isprs-annals-V-1-2021-47-2021},
+journal = {ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences},
+pages = {47--54},
+title = {{DEEPLIO: DEEP LIDAR INERTIAL SENSOR FUSION FOR ODOMETRY ESTIMATION}},
+url = {https://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/V-1-2021/47/2021/},
+volume = {V-1-2021},
+year = {2021}
 }
-
 ```
