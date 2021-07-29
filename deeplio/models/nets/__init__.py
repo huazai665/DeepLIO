@@ -59,6 +59,7 @@ def create_deeplio_arch(input_shape, cfg, device):
 
     odom_feat_net = create_odometry_feat_net(odom_inshape, cfg, arch_cfg, device)
     odom_outshape = odom_feat_net.get_output_shape() if odom_feat_net is not None else None
+    # print(" odom_outshape=", odom_outshape)
     if odom_feat_net is not None:
         net_logger.print("\tInput-shape: {}, Output-shape: {}".format(odom_inshape, odom_outshape))
 
@@ -176,7 +177,16 @@ def create_fusion_net(input_shape, cfg, arch_cfg, device):
     else:
         raise ValueError("Wrong feature network {}".format(feat_name))
     #TODO enable loading of pretrained model for soft-fusion
+    feat_net.to(device)
+    if feat_cfg['pretrained']:
+        model_path = feat_cfg['model-path']
+        load_state_dict(feat_net, model_path)
+        feat_net.pretrained = True
+
     #TODO enable configurating of requires-grad
+    if not feat_cfg['requires-grad']:
+        disable_grad(feat_net)
+
     return feat_net
 
 
@@ -201,8 +211,8 @@ def create_odometry_feat_net(input_shape, cfg, arch_cfg, device):
         raise ValueError("Wrong odometry feature network {}".format(feat_name))
 
     feat_net.to(device)
-
-    if feat_cfg['pretrained']:
+    
+    if feat_name == 'fusion-layer-soft' and feat_cfg['pretrained']:
         model_path = feat_cfg['model-path']
         load_state_dict(feat_net, model_path)
         feat_net.pretrained = True
